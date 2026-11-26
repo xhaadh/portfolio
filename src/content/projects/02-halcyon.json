@@ -1,14 +1,14 @@
 {
-  "slug": "halcyon",
+  "slug": "orthobotx",
   "index": 2,
-  "title": "HALCYON",
-  "titleMixedCase": "Halcyon",
-  "year": 2026,
-  "completed": "Aug. 2026",
-  "type": "Editorial",
-  "role": "Development",
-  "client": "Halcyon Magazine",
-  "description": "Digital edition of a quarterly print magazine. A custom layout engine turns long-form essays into paginated spreads that feel like paper.",
+  "title": "ORTHOBOT X",
+  "titleMixedCase": "OrthoBOT_X",
+  "year": 2025,
+  "completed": "Sep. 2025",
+  "type": "E-commerce & MedTech",
+  "role": "Frontend & motion development",
+  "client": "OrthoBOT_X",
+  "description": "An e-commerce platform where clinics and patients browse and filter prosthetic and orthotic products, manage wishlists and carts, and send inquiries. Features role-based dashboards with custom device ordering, saved drafts, and order tracking.",
   "color": "#2E4BD9",
   "textColor": "#F6EBD0",
   "cover": "/images/projects/halcyon/cover.webp",
@@ -20,5 +20,5 @@
     "/images/projects/halcyon/04.webp",
     "/images/projects/halcyon/05.webp"
   ],
-  "url": "https://example.com/halcyon"
+  "url": "https://orthobotx.com"
 }

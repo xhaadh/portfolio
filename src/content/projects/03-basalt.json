@@ -1,15 +1,15 @@
 {
-  "slug": "basalt",
+  "slug": "know-my-build",
   "index": 3,
-  "title": "BASALT",
-  "titleMixedCase": "Basalt",
-  "year": 2026,
-  "completed": "Jun. 2026",
-  "type": "Architecture portfolio",
-  "role": "Design & development",
-  "client": "Basalt Studio",
-  "description": "Portfolio for an architecture practice working with stone and timber. Projects are browsed as a continuous material sample wall.",
-  "color": "#1F7A52",
+  "title": "KNOW MY BUILD",
+  "titleMixedCase": "Know My Build",
+  "year": 2025,
+  "completed": "Aug. 2025",
+  "type": "Estimating Platform",
+  "role": "Creative development & motion",
+  "client": "Know My Build (UK)",
+  "description": "Website for a UK construction estimating firm where clients explore services, view case studies, and request project quotes by uploading drawings, with GSAP and Lenis scroll animations.",
+  "color": "#D9483B",
   "textColor": "#F6EBD0",
   "cover": "/images/projects/basalt/cover.webp",
   "images": [
@@ -22,5 +22,5 @@
     "/images/projects/basalt/06.webp",
     "/images/projects/basalt/07.webp"
   ],
-  "url": "https://example.com/basalt"
+  "url": "https://knowmybuild.co.uk"
 }

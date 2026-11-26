@@ -1,15 +1,15 @@
 {
-  "slug": "meridian",
+  "slug": "ealzo",
   "index": 1,
-  "title": "MERIDIAN",
-  "titleMixedCase": "Meridian",
-  "year": 2026,
-  "completed": "Oct. 2026",
-  "type": "E-commerce",
-  "role": "Design & development",
-  "client": "Meridian Watches",
-  "description": "A slow, tactile storefront for a small watchmaker. Every product page is a single continuous scroll with WebGL light studies of the dials.",
-  "color": "#D9483B",
+  "title": "EALZO",
+  "titleMixedCase": "Ealzo",
+  "year": 2025,
+  "completed": "Nov. 2025",
+  "type": "Healthcare Platform",
+  "role": "Full-stack development",
+  "client": "Ealzo",
+  "description": "A healthcare discovery platform where patients search by specialty and location, view clinics on an interactive map, read verified reviews, and book appointments online. Features dedicated Doctor and Hospital admin panels.",
+  "color": "#1F7A52",
   "textColor": "#F6EBD0",
   "cover": "/images/projects/meridian/cover.webp",
   "images": [
@@ -21,5 +21,5 @@
     "/images/projects/meridian/05.webp",
     "/images/projects/meridian/06.webp"
   ],
-  "url": "https://example.com/meridian"
+  "url": "https://ealzo.com"
 }

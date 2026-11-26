@@ -1,17 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
-
-// Clients grouped by first letter (A, B, D, ...).
-const groups = Object.entries(
-  [...site.clients]
-    .sort((a, b) => a.localeCompare(b))
-    .reduce<Record<string, string[]>>((acc, c) => {
-      const k = c[0].toUpperCase();
-      (acc[k] ||= []).push(c);
-      return acc;
-    }, {}),
-);
 ---
 
 <Base page="about" title="About" description={site.description}>
@@ -21,33 +10,37 @@ const groups = Object.entries(
     </h1>
 
     <div class="about__cols">
-      <section class="about__col" aria-labelledby="clients-title">
-        <h2 id="clients-title" data-line>Clients</h2>
+      <section class="about__col" aria-labelledby="experience-title">
+        <h2 id="experience-title" data-line>Experience</h2>
         {
-          groups.map(([letter, names]) => (
+          site.experience.map((exp) => (
             <ul class="about__group m-0 list-none p-0">
-              <li data-line aria-hidden="true">{letter}</li>
-              {names.map((n) => (
-                <li data-line>{n}</li>
-              ))}
+              <li data-line class="opacity-60">{exp.period}</li>
+              <li data-line class="font-medium">{exp.role}</li>
+              <li data-line class="opacity-80">{exp.company}</li>
+              <li data-line class="opacity-50 text-xs">{exp.location}</li>
             </ul>
           ))
         }
+
+        <div class="mt-8">
+          <ul class="about__group m-0 list-none p-0">
+            <li data-line class="opacity-60">Education</li>
+            <li data-line class="font-medium">{site.education.degree}</li>
+            <li data-line class="opacity-80">{site.education.institution}</li>
+            <li data-line class="opacity-50 text-xs">{site.education.period}</li>
+          </ul>
+        </div>
       </section>
 
-      <section class="about__col" aria-labelledby="awards-title">
-        <h2 id="awards-title" data-line>Awards</h2>
+      <section class="about__col" aria-labelledby="skills-title">
+        <h2 id="skills-title" data-line>Skills & Stack</h2>
         {
-          site.awards.map((g) => (
+          site.skills.map((group) => (
             <ul class="about__group m-0 list-none p-0">
-              <li data-line class="opacity-60">{g.org}</li>
-              {g.items.map((a) => (
-                <li data-line>
-                  <span class="about__award">
-                    <span>{a.count}</span>
-                    <span>{a.label}</span>
-                  </span>
-                </li>
+              <li data-line class="opacity-60">{group.category}</li>
+              {group.items.map((skill) => (
+                <li data-line>{skill}</li>
               ))}
             </ul>
           ))

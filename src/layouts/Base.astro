@@ -148,7 +148,14 @@ const cornerSocials = site.socials.slice(0, site.cornerSocials);
             <ul class="stack m-0 list-none p-0">
               {site.socials.map((s) => (
                 <li data-line>
-                  <a class="ulink" href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+                  <a
+                    class="ulink"
+                    href={s.href}
+                    download={s.download}
+                    data-astro-prefetch={s.download ? 'false' : undefined}
+                    target={s.href.startsWith('http') ? '_blank' : undefined}
+                    rel={s.href.startsWith('http') ? 'noopener' : undefined}
+                  >
                     <span class="ulink__in">
                       {s.label} <Arrow />
                     </span>
@@ -168,7 +175,14 @@ const cornerSocials = site.socials.slice(0, site.cornerSocials);
           <ul class="stack corner--right m-0 list-none p-0" data-corner data-variant="main" transition:persist="corner-br-main">
             {cornerSocials.map((s) => (
               <li data-line>
-                <a class="ulink" href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+                <a
+                  class="ulink"
+                  href={s.href}
+                  download={s.download}
+                  data-astro-prefetch={s.download ? 'false' : undefined}
+                  target={s.href.startsWith('http') ? '_blank' : undefined}
+                  rel={s.href.startsWith('http') ? 'noopener' : undefined}
+                >
                   <span class="ulink__in">{s.label}</span>
                 </a>
               </li>

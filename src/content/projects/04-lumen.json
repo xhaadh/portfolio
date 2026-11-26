@@ -1,14 +1,14 @@
 {
-  "slug": "lumen",
+  "slug": "prime-mlm",
   "index": 4,
-  "title": "LUMEN",
-  "titleMixedCase": "Lumen",
-  "year": 2026,
-  "completed": "Apr. 2026",
-  "type": "Product launch",
-  "role": "Creative development",
-  "client": "Lumen Audio",
-  "description": "Launch site for a pair of studio headphones, with a real-time sound-reactive visualiser driven by the Web Audio API.",
+  "title": "PRIME MLM",
+  "titleMixedCase": "Prime MLM",
+  "year": 2025,
+  "completed": "Jun. 2025",
+  "type": "Enterprise Application",
+  "role": "Full-stack development",
+  "client": "FUINSS Software Solution",
+  "description": "Enterprise multi-level management and analytics application built with React, PHP, and CodeIgniter, handling complex compensation plans, member genealogies, and financial payouts.",
   "color": "#C9A227",
   "textColor": "#F6EBD0",
   "cover": "/images/projects/lumen/cover.webp",
@@ -21,5 +21,5 @@
     "/images/projects/lumen/05.webp",
     "/images/projects/lumen/06.webp"
   ],
-  "url": "https://example.com/lumen"
+  "url": ""
 }
