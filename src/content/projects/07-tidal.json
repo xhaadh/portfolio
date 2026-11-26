@@ -1,0 +1,25 @@
+{
+  "slug": "tidal",
+  "index": 7,
+  "title": "TIDAL",
+  "titleMixedCase": "Tidal",
+  "year": 2025,
+  "completed": "Aug. 2025",
+  "type": "Campaign site",
+  "role": "Creative development",
+  "client": "Tidal Foundation",
+  "description": "Awareness campaign for coastal conservation, built around a live ocean-surface simulation and real tide data.",
+  "color": "#157A8C",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/tidal/cover.webp",
+  "images": [
+    "/images/projects/tidal/cover.webp",
+    "/images/projects/tidal/01.webp",
+    "/images/projects/tidal/02.webp",
+    "/images/projects/tidal/03.webp",
+    "/images/projects/tidal/04.webp",
+    "/images/projects/tidal/05.webp",
+    "/images/projects/tidal/06.webp"
+  ],
+  "url": "https://example.com/tidal"
+}

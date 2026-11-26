@@ -1,0 +1,31 @@
+{
+  "name": "webgl-portfolio",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "build:fast": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "fetch:images": "node scripts/fetch-placeholders.mjs",
+    "verify": "node scripts/verify.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter-tight": "^5.3.0",
+    "@fontsource-variable/league-gothic": "^5.3.0",
+    "@tailwindcss/vite": "^4.3.5",
+    "astro": "^5.18.2",
+    "ogl": "^1.0.11",
+    "tailwindcss": "^4.3.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^24.19.2",
+    "playwright": "^1.65.1",
+    "sharp": "^0.35.5",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.7"
+  }
+}

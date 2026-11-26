@@ -1,0 +1,25 @@
+{
+  "slug": "lumen",
+  "index": 4,
+  "title": "LUMEN",
+  "titleMixedCase": "Lumen",
+  "year": 2026,
+  "completed": "Apr. 2026",
+  "type": "Product launch",
+  "role": "Creative development",
+  "client": "Lumen Audio",
+  "description": "Launch site for a pair of studio headphones, with a real-time sound-reactive visualiser driven by the Web Audio API.",
+  "color": "#C9A227",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/lumen/cover.webp",
+  "images": [
+    "/images/projects/lumen/cover.webp",
+    "/images/projects/lumen/01.webp",
+    "/images/projects/lumen/02.webp",
+    "/images/projects/lumen/03.webp",
+    "/images/projects/lumen/04.webp",
+    "/images/projects/lumen/05.webp",
+    "/images/projects/lumen/06.webp"
+  ],
+  "url": "https://example.com/lumen"
+}

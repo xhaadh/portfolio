@@ -1,0 +1,26 @@
+{
+  "slug": "nocturne",
+  "index": 10,
+  "title": "NOCTURNE",
+  "titleMixedCase": "Nocturne",
+  "year": 2024,
+  "completed": "Sep. 2024",
+  "type": "Music festival",
+  "role": "Creative development",
+  "client": "Nocturne Festival",
+  "description": "Line-up and ticketing for a night-time music festival. The schedule is a scrubbable timeline of the night sky.",
+  "color": "#3B3FA6",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/nocturne/cover.webp",
+  "images": [
+    "/images/projects/nocturne/cover.webp",
+    "/images/projects/nocturne/01.webp",
+    "/images/projects/nocturne/02.webp",
+    "/images/projects/nocturne/03.webp",
+    "/images/projects/nocturne/04.webp",
+    "/images/projects/nocturne/05.webp",
+    "/images/projects/nocturne/06.webp",
+    "/images/projects/nocturne/07.webp"
+  ],
+  "url": "https://example.com/nocturne"
+}

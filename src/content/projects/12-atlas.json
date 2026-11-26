@@ -1,0 +1,25 @@
+{
+  "slug": "atlas",
+  "index": 12,
+  "title": "ATLAS",
+  "titleMixedCase": "Atlas",
+  "year": 2024,
+  "completed": "Mar. 2024",
+  "type": "Interactive map",
+  "role": "Concept & code",
+  "client": "Atlas Geographic",
+  "description": "An explorable map of forgotten trade routes, drawn progressively as you travel through two thousand years of history.",
+  "color": "#7A2E3B",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/atlas/cover.webp",
+  "images": [
+    "/images/projects/atlas/cover.webp",
+    "/images/projects/atlas/01.webp",
+    "/images/projects/atlas/02.webp",
+    "/images/projects/atlas/03.webp",
+    "/images/projects/atlas/04.webp",
+    "/images/projects/atlas/05.webp",
+    "/images/projects/atlas/06.webp"
+  ],
+  "url": "https://example.com/atlas"
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "meridian",
+  "index": 1,
+  "title": "MERIDIAN",
+  "titleMixedCase": "Meridian",
+  "year": 2026,
+  "completed": "Oct. 2026",
+  "type": "E-commerce",
+  "role": "Design & development",
+  "client": "Meridian Watches",
+  "description": "A slow, tactile storefront for a small watchmaker. Every product page is a single continuous scroll with WebGL light studies of the dials.",
+  "color": "#D9483B",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/meridian/cover.webp",
+  "images": [
+    "/images/projects/meridian/cover.webp",
+    "/images/projects/meridian/01.webp",
+    "/images/projects/meridian/02.webp",
+    "/images/projects/meridian/03.webp",
+    "/images/projects/meridian/04.webp",
+    "/images/projects/meridian/05.webp",
+    "/images/projects/meridian/06.webp"
+  ],
+  "url": "https://example.com/meridian"
+}

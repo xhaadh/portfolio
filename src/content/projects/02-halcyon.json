@@ -1,0 +1,24 @@
+{
+  "slug": "halcyon",
+  "index": 2,
+  "title": "HALCYON",
+  "titleMixedCase": "Halcyon",
+  "year": 2026,
+  "completed": "Aug. 2026",
+  "type": "Editorial",
+  "role": "Development",
+  "client": "Halcyon Magazine",
+  "description": "Digital edition of a quarterly print magazine. A custom layout engine turns long-form essays into paginated spreads that feel like paper.",
+  "color": "#2E4BD9",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/halcyon/cover.webp",
+  "images": [
+    "/images/projects/halcyon/cover.webp",
+    "/images/projects/halcyon/01.webp",
+    "/images/projects/halcyon/02.webp",
+    "/images/projects/halcyon/03.webp",
+    "/images/projects/halcyon/04.webp",
+    "/images/projects/halcyon/05.webp"
+  ],
+  "url": "https://example.com/halcyon"
+}

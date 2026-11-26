@@ -1,0 +1,194 @@
+---
+/**
+ * Base layout: fixed corners, persistent WebGL canvas + loader, ClientRouter, page meta.
+ *
+ * Persisted across navigations (transition:persist): the canvas host (WebGL never
+ * re-initialises), the loader, the ruler, the logo, and any corner that is identical on the
+ * next page. Corners that change (about <-> others) are re-rendered and animated by JS.
+ */
+import '@fontsource-variable/league-gothic';
+import '@fontsource-variable/inter-tight';
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import { getCollection } from 'astro:content';
+import { site } from '../data/site';
+import { config, cssVars } from '../scripts/config';
+import Arrow from '../components/Arrow.astro';
+
+export type PageName = 'home' | 'project' | 'about';
+
+interface Props {
+  page: PageName;
+  title?: string;
+  description?: string;
+  slug?: string;
+  /** Initial page colours (project pages use the project colour). */
+  bg?: string;
+  fg?: string;
+  image?: string;
+}
+
+const {
+  page,
+  title,
+  description = site.description,
+  slug,
+  bg = config.colors.bg,
+  fg = config.colors.fg,
+  image,
+} = Astro.props;
+
+const projects = (await getCollection('projects'))
+  .map((p) => p.data)
+  .sort((a, b) => a.index - b.index);
+
+// Data the client scripts need (kept small).
+const clientData = projects.map(({ slug, index, title, titleMixedCase, color, textColor, cover, images, completed, type, role, description }) => ({
+  completed,
+  type,
+  role,
+  description,
+  slug,
+  index,
+  title,
+  titleMixedCase,
+  color,
+  textColor,
+  cover,
+  images,
+}));
+
+const fullTitle = title ? `${title} — ${site.name}` : `${site.name} — ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+const ogImage = new URL(image ?? projects[0]?.cover ?? '/favicon.svg', Astro.site ?? site.url).href;
+const themeColor = bg === config.colors.bg ? config.colors.themeColor : bg;
+const variant = page === 'about' ? 'about' : 'main';
+const scroll = page === 'about' ? 'always' : page === 'project' ? 'mobile' : undefined;
+const cornerSocials = site.socials.slice(0, site.cornerSocials);
+---
+
+<!doctype html>
+<html
+  lang="en"
+  data-page={page}
+  data-slug={slug}
+  data-scroll={scroll}
+  style={`--bg:${bg};--fg:${fg}`}
+  transition:animate="none"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content={themeColor} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <style is:inline set:html={cssVars()} />
+    <noscript><style is:inline>.loader { display: none !important; }</style></noscript>
+    <ClientRouter />
+  </head>
+  <body>
+    <div id="gl" transition:persist="gl" aria-hidden="true"><canvas></canvas></div>
+
+    <div id="loader" class="loader" transition:persist="loader" role="status" aria-busy="true" aria-label="Loading">
+      <div class="loader__count"></div>
+    </div>
+
+    <header class="corners corners--top">
+      <a href="/" class="logo" data-corner data-variant="all" transition:persist="corner-logo" aria-label={`${site.name}, home`}>
+        <span data-line>{site.logo}</span>
+      </a>
+
+      <div class="corner--center">
+        <div class="ruler" data-ruler transition:persist="ruler" aria-hidden="true">
+          <div class="ruler__ticks"></div>
+          <div class="ruler__pag">
+            <span class="ruler__cur">01</span>
+            <span class="ruler__box"></span>
+            <span class="ruler__tot">{String(projects.length).padStart(2, '0')}</span>
+          </div>
+        </div>
+      </div>
+
+      {
+        variant === 'main' ? (
+          <a href="/about/" class="ulink is-underlined corner--right" data-corner data-variant="main" transition:persist="corner-tr-main">
+            <span class="ulink__in">About</span>
+          </a>
+        ) : (
+          <a href="/" class="ulink is-underlined corner--right" data-corner data-variant="about" data-close transition:persist="corner-tr-about">
+            <span class="ulink__in">Close</span>
+          </a>
+        )
+      }
+    </header>
+
+    <slot />
+
+    <footer class="corners corners--bottom">
+      {
+        variant === 'main' ? (
+          <div class="stack" data-corner data-variant="main" transition:persist="corner-bl-main">
+            <span data-line>{site.tagline}</span>
+            <span data-line>{site.availability}</span>
+          </div>
+        ) : (
+          <div class="stack" data-corner data-variant="about" transition:persist="corner-bl-about">
+            <ul class="stack m-0 list-none p-0">
+              {site.socials.map((s) => (
+                <li data-line>
+                  <a class="ulink" href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+                    <span class="ulink__in">
+                      {s.label} <Arrow />
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div class="stack mt-[2.4em]">
+              <span data-line>{site.tagline}</span>
+              <span data-line>{site.availability}</span>
+            </div>
+          </div>
+        )
+      }
+      {
+        variant === 'main' ? (
+          <ul class="stack corner--right m-0 list-none p-0" data-corner data-variant="main" transition:persist="corner-br-main">
+            {cornerSocials.map((s) => (
+              <li data-line>
+                <a class="ulink" href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+                  <span class="ulink__in">{s.label}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="stack corner--right" data-corner data-variant="about" transition:persist="corner-br-about">
+            <span data-line>{site.copyright}</span>
+            <span data-line>
+              {site.name} {site.year}©
+            </span>
+          </div>
+        )
+      }
+    </footer>
+
+    <script type="application/json" id="projects-data" set:html={JSON.stringify(clientData)} />
+    <script>
+      import { boot } from '../scripts/app';
+      boot();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "slug": "kinetic",
+  "index": 6,
+  "title": "KINETIC",
+  "titleMixedCase": "Kinetic",
+  "year": 2025,
+  "completed": "Oct. 2025",
+  "type": "WebGL experiment",
+  "role": "Concept & code",
+  "client": "Personal",
+  "description": "A playground of physics-driven typography. Letters are soft bodies that react to scroll velocity and cursor pressure.",
+  "color": "#E0662B",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/kinetic/cover.webp",
+  "images": [
+    "/images/projects/kinetic/cover.webp",
+    "/images/projects/kinetic/01.webp",
+    "/images/projects/kinetic/02.webp",
+    "/images/projects/kinetic/03.webp",
+    "/images/projects/kinetic/04.webp",
+    "/images/projects/kinetic/05.webp",
+    "/images/projects/kinetic/06.webp",
+    "/images/projects/kinetic/07.webp"
+  ],
+  "url": "https://example.com/kinetic"
+}

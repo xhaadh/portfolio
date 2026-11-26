@@ -1,0 +1,25 @@
+{
+  "slug": "ferro",
+  "index": 9,
+  "title": "FERRO",
+  "titleMixedCase": "Ferro",
+  "year": 2024,
+  "completed": "Nov. 2024",
+  "type": "Industrial design",
+  "role": "Development",
+  "client": "Ferro Works",
+  "description": "Catalogue for a cast-iron furniture maker, with an interactive configurator rendered in the browser.",
+  "color": "#4F6B2A",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/ferro/cover.webp",
+  "images": [
+    "/images/projects/ferro/cover.webp",
+    "/images/projects/ferro/01.webp",
+    "/images/projects/ferro/02.webp",
+    "/images/projects/ferro/03.webp",
+    "/images/projects/ferro/04.webp",
+    "/images/projects/ferro/05.webp",
+    "/images/projects/ferro/06.webp"
+  ],
+  "url": "https://example.com/ferro"
+}

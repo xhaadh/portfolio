@@ -1,0 +1,826 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------------------------------
+   Design tokens
+   ------------------------------------------------------------------------------------------ */
+@theme {
+  --color-ink: #141414;
+  --color-mist: #bac4b8;
+  --color-cream: #f6ebd0;
+  --color-accent: #cc9933;
+  --font-display: "League Gothic Variable", "League Gothic", "Impact", sans-serif;
+  --font-ui: "Inter Tight Variable", "Helvetica Neue", "Arial", sans-serif;
+}
+
+:root {
+  /* Page colours - tweened by JS (scripts/utils/theme.ts). */
+  --bg: #141414;
+  --fg: #bac4b8;
+  --accent: #cc9933;
+
+  --inset: clamp(18px, 3.4vw, 52px);
+  --ui-size: 11.5px;
+  --ui-leading: 1.15;
+  --ui-tracking: 0.02em;
+  --display-weight: 400;
+
+  /* Giant titles (cap height ~27vh like the reference). */
+  --ptitle-size: 37vh;
+  --proj-title-size: 34vh;
+  --about-title-size: 25vh;
+  --logo-size: clamp(26px, 2.5vw, 38px);
+
+  --ease-out: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --ui-size: 10.5px;
+    --ptitle-size: 15vh;
+    --proj-title-size: 17vw;
+    --about-title-size: 27vw;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------
+   Base
+   ------------------------------------------------------------------------------------------ */
+html {
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  font-size: var(--ui-size);
+  line-height: var(--ui-leading);
+  letter-spacing: var(--ui-tracking);
+  text-transform: uppercase;
+  font-weight: 450;
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Pages that need native scrolling (about everywhere, project page on mobile). */
+html[data-scroll="always"],
+html[data-scroll="always"] body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  min-height: 100%;
+}
+@media (max-width: 767px) {
+  html[data-scroll="mobile"],
+  html[data-scroll="mobile"] body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100%;
+  }
+}
+
+html[data-page="home"] {
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-transform: inherit;
+  letter-spacing: inherit;
+}
+
+:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+html.is-pointer,
+html.is-pointer body {
+  cursor: pointer;
+}
+html.is-dragging,
+html.is-dragging body {
+  cursor: grabbing;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  line-height: 0.8;
+  letter-spacing: 0;
+}
+
+/* ------------------------------------------------------------------------------------------
+   Masks for reveals (see scripts/ui/splitText.ts)
+   ------------------------------------------------------------------------------------------ */
+.char {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.char__in,
+.line__in {
+  display: inline-block;
+}
+.line {
+  display: block;
+  overflow: hidden;
+}
+.char-space {
+  display: inline-block;
+}
+
+/* ------------------------------------------------------------------------------------------
+   Underlined links: 1px line scales in from the left on hover, out to the right.
+   .is-underlined keeps it visible and plays an out/in sweep on hover.
+   ------------------------------------------------------------------------------------------ */
+.ulink {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.ulink__in {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+.ulink__in::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.7s var(--ease-out);
+}
+.ulink:hover .ulink__in::after,
+.ulink:focus-visible .ulink__in::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+.ulink.is-underlined .ulink__in::after {
+  transform: scaleX(1);
+  transition: none;
+}
+.ulink.is-underlined:hover .ulink__in::after {
+  animation: uline-sweep 0.9s var(--ease-out);
+}
+@keyframes uline-sweep {
+  0% {
+    transform: scaleX(1);
+    transform-origin: right center;
+  }
+  45% {
+    transform: scaleX(0);
+    transform-origin: right center;
+  }
+  46% {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------
+   Fixed corners
+   ------------------------------------------------------------------------------------------ */
+.corners {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  pointer-events: none;
+  padding: var(--inset);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+}
+.corners > * {
+  pointer-events: auto;
+}
+.corners--top {
+  top: 0;
+  align-items: center;
+}
+.corners--bottom {
+  bottom: 0;
+  align-items: end;
+  grid-template-columns: 1fr 1fr;
+}
+.corner--right {
+  justify-self: end;
+  text-align: right;
+}
+.corner--center {
+  justify-self: center;
+}
+
+.logo {
+  display: inline-block;
+  justify-self: start; /* only the wordmark is clickable, not the whole grid column */
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--logo-size);
+  line-height: 0.82;
+  letter-spacing: 0;
+  margin-left: -0.08em;
+  transition: opacity 0.6s var(--ease-out);
+}
+/* The about page's giant heading takes the logo's place (as in the reference). */
+html[data-page="about"] .logo {
+  opacity: 0;
+  pointer-events: none;
+}
+.logo .line {
+  padding-top: 0.04em;
+}
+
+.stack > * {
+  display: block;
+}
+.stack .ulink__in {
+  padding-bottom: 2px;
+}
+
+@media (max-width: 767px) {
+  /* Scrollable pages: corners scroll with the document. */
+  html[data-scroll] .corners {
+    position: absolute;
+  }
+  html[data-scroll] body {
+    position: relative;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------
+   Ruler / pagination (top centre)
+   ------------------------------------------------------------------------------------------ */
+.ruler {
+  position: relative;
+  height: 14px;
+  transition: opacity 0.6s var(--ease-out);
+}
+.ruler.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.ruler__ticks {
+  position: relative;
+}
+.ruler__ticks i {
+  position: absolute;
+  top: 0;
+  background: var(--fg);
+  opacity: 0.3;
+}
+.ruler__pag {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--accent);
+  white-space: nowrap;
+  opacity: 0;
+  font-size: var(--ui-size);
+}
+.ruler__pag.is-plain {
+  color: var(--fg);
+}
+.ruler__box {
+  width: 22px;
+  height: 11px;
+  border: 1px solid currentColor;
+}
+
+/* ------------------------------------------------------------------------------------------
+   WebGL canvas + loader
+   ------------------------------------------------------------------------------------------ */
+#gl {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+#gl canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--bg);
+}
+/* Counter sits exactly on the logo (positioned by scripts/ui/loader.ts). */
+.loader__count {
+  position: absolute;
+  left: var(--inset);
+  top: var(--inset);
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--logo-size);
+  line-height: 0.82;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg);
+}
+.loader__count .char,
+.logo .char {
+  padding-top: 0.04em;
+}
+
+/* ------------------------------------------------------------------------------------------
+   Home: preview title + explore
+   ------------------------------------------------------------------------------------------ */
+.ptitle {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: calc(50% - var(--prev-h) / 2 - var(--ptitle-size) * var(--ptitle-scale, 1) * 0.29);
+  height: calc(var(--ptitle-size) * var(--ptitle-scale, 1));
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: calc(var(--ptitle-size) * var(--ptitle-scale, 1));
+  line-height: 1;
+  color: var(--fg);
+  pointer-events: none;
+  visibility: hidden;
+}
+.preview.is-active .ptitle {
+  visibility: visible;
+}
+.ptitle--back {
+  z-index: 5;
+}
+.ptitle--front {
+  z-index: 20;
+}
+.pchar {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  display: block;
+  line-height: 1;
+}
+.pchar__in {
+  display: block;
+}
+.ptitle--front .pchar.is-ghost {
+  visibility: hidden;
+}
+
+.pexplore {
+  position: fixed;
+  z-index: 25;
+  left: 50%;
+  top: calc(50% + var(--prev-h) / 2 + 7vh);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  visibility: hidden;
+}
+.preview.is-active .pexplore {
+  visibility: visible;
+}
+.pexplore__line {
+  display: block;
+  overflow: hidden;
+  width: 1px;
+  height: 20px;
+}
+.pexplore__line span {
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: currentColor;
+}
+.pexplore__plus {
+  /* Generous hit area around the small icon (no overflow clipping here: the mask is .pplus). */
+  display: block;
+  padding: 10px 14px;
+  margin: -10px -14px;
+  line-height: 0;
+}
+.pplus {
+  display: block;
+  overflow: hidden;
+  width: 12px;
+  height: 14px;
+}
+.pplus__svg {
+  display: block;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+/* "+" -> down arrow: the two halves of the bar slide down the stem and fold into the
+   arrowhead (pivot = centre of the plus). */
+.pplus__wing {
+  transform-box: view-box;
+  transform-origin: 6px 7px;
+  transition: transform 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.pexplore__plus:hover .pplus__wing--l,
+.pexplore__plus:focus-visible .pplus__wing--l,
+#explore:hover ~ .pexplore__plus .pplus__wing--l {
+  transform: translate(0, 5.8px) rotate(45deg);
+}
+.pexplore__plus:hover .pplus__wing--r,
+.pexplore__plus:focus-visible .pplus__wing--r,
+#explore:hover ~ .pexplore__plus .pplus__wing--r {
+  transform: translate(0, 5.8px) rotate(-45deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pplus__wing {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* Bottom details row in preview mode. */
+.pmeta {
+  position: fixed;
+  z-index: 25;
+  left: 23vw;
+  right: 22vw;
+  bottom: var(--inset);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none;
+  visibility: hidden;
+}
+.preview.is-active .pmeta {
+  visibility: visible;
+}
+.pmeta__row {
+  display: grid;
+  grid-template-columns: 2.6em 8.4vw auto;
+  align-items: baseline;
+}
+.pmeta__k {
+  font-size: 0.62em;
+}
+.pmeta__desc {
+  width: 19vw;
+  margin: 0;
+}
+@media (max-width: 1100px) {
+  .pmeta {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------
+   Project page
+   ------------------------------------------------------------------------------------------ */
+.proj__back {
+  position: fixed;
+  z-index: 30;
+  top: var(--inset);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.proj__x {
+  display: block;
+  overflow: hidden;
+  line-height: 1;
+}
+.proj__x span {
+  display: block;
+  font-size: 13px;
+}
+
+.proj__title {
+  position: fixed;
+  z-index: 1;
+  left: calc(var(--inset) - 0.04em);
+  top: calc(50% - var(--proj-h) / 2 - var(--proj-title-size) * 0.2);
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--proj-title-size);
+  line-height: 0.9;
+  white-space: nowrap;
+  color: var(--fg);
+}
+.proj__title .char {
+  padding-top: 0.04em;
+}
+
+.proj__media {
+  position: fixed;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: var(--proj-w);
+  height: var(--proj-h);
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+.proj__media img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.proj__media.is-waiting img {
+  visibility: hidden;
+}
+.proj__wipe {
+  position: absolute;
+  inset: 0;
+  background: var(--pcolor, var(--bg));
+  transform: scaleX(0);
+  transform-origin: right center;
+}
+
+.proj__thumbs {
+  position: fixed;
+  z-index: 30;
+  right: var(--inset);
+  top: calc(50% - var(--proj-h) / 2 - 2vh);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.proj__thumbs li:nth-child(2n + 1):not(:first-child) {
+  margin-top: clamp(20px, 6vh, 64px);
+}
+.pthumb {
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 34px;
+  overflow: hidden;
+}
+.pthumb__in {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.pthumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s;
+}
+/* Outline lives inside the masked inner so it reveals together with the image. */
+.pthumb__in::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--fg);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+  pointer-events: none;
+}
+.pthumb.is-active .pthumb__in::after {
+  opacity: 1;
+}
+.pthumb:not(.is-active):hover img {
+  opacity: 0.8;
+}
+
+.proj__info {
+  position: fixed;
+  z-index: 30;
+  left: var(--inset);
+  bottom: calc(var(--inset) + 6.5em);
+  width: calc(50vw - var(--proj-w) / 2 - var(--inset) - 3vw);
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+.proj__meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15em 1.2em;
+  margin: 0;
+}
+.proj__meta dt {
+  opacity: 0.6;
+}
+.proj__meta dd {
+  margin: 0;
+}
+.proj__desc {
+  margin: 0;
+}
+
+/* Short desktop viewports (laptops with browser chrome): keep the thumb column clear of the
+   bottom-right links. */
+@media (min-width: 768px) and (max-height: 680px) {
+  .proj__thumbs {
+    gap: 4px;
+  }
+  .proj__thumbs li:nth-child(2n + 1):not(:first-child) {
+    margin-top: 3vh;
+  }
+  .pthumb {
+    width: 50px;
+    height: 28px;
+  }
+}
+
+/* ------------------------------------------------------------------------------------------
+   About page
+   ------------------------------------------------------------------------------------------ */
+.about {
+  position: relative;
+  min-height: 100vh;
+  padding: var(--inset);
+}
+.about__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: var(--about-title-size);
+  line-height: 0.86;
+  letter-spacing: 0;
+  margin-top: -0.02em;
+  margin-left: -0.03em;
+}
+.about__heading-line {
+  display: block;
+  white-space: nowrap;
+}
+.about__heading .char {
+  padding-top: 0.05em;
+}
+.about__cols {
+  position: absolute;
+  top: 0;
+  left: 61vw;
+  right: var(--inset);
+  padding-top: 20vh;
+  padding-bottom: var(--inset);
+  display: grid;
+  grid-template-columns: 19.5vw 1fr;
+}
+.about__col h2 {
+  font: inherit;
+  margin: 0 0 3.2em;
+}
+.about__group {
+  margin-bottom: 1.15em;
+}
+.about__award {
+  display: grid;
+  grid-template-columns: 2.4em 1fr;
+}
+.about__award span:first-child {
+  text-align: left;
+}
+
+/* ------------------------------------------------------------------------------------------
+   Fallback without WebGL: show the project list as plain links.
+   ------------------------------------------------------------------------------------------ */
+html.no-webgl #project-list {
+  position: fixed;
+  z-index: 20;
+  left: 48vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  clip-path: none;
+  overflow: visible;
+  white-space: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-size: 5vh;
+  line-height: 1;
+}
+
+/* ------------------------------------------------------------------------------------------
+   Mobile
+   ------------------------------------------------------------------------------------------ */
+@media (max-width: 767px) {
+  .proj {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: calc(var(--inset) * 2 + var(--logo-size) + 34px) var(--inset) calc(var(--inset) * 2 + 6em);
+    gap: 22px;
+    min-height: 100vh;
+  }
+  .proj__back {
+    position: absolute;
+  }
+  .proj__title {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-left: -0.04em;
+  }
+  .proj__media {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10.5;
+    margin-top: -5vw;
+  }
+  .proj__thumbs {
+    position: relative;
+    right: auto;
+    top: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .proj__thumbs li:nth-child(2n + 1):not(:first-child) {
+    margin-top: 0;
+    margin-left: 14px;
+  }
+  .pthumb {
+    width: 52px;
+    height: 30px;
+  }
+  .proj__info {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: auto;
+    max-width: none;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+    padding-top: calc(var(--inset) * 2 + 10px);
+    padding-bottom: calc(var(--inset) * 2 + 16em);
+    display: flex;
+    flex-direction: column;
+    gap: 9vh;
+  }
+  .about__cols {
+    position: static;
+    padding-top: 0;
+    gap: 6vw;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ulink__in::after,
+  .ruler {
+    transition-duration: 0.01ms !important;
+  }
+  .ulink.is-underlined:hover .ulink__in::after {
+    animation: none;
+  }
+}

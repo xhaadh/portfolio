@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+const projects = (await getCollection('projects')).map((p) => p.data).sort((a, b) => a.index - b.index);
+---
+
+<Base page="home">
+  <main id="page">
+    <h1 class="sr-only">{site.name} — {site.tagline}</h1>
+
+    <!-- Real links for SEO / keyboard. The gallery itself is drawn in WebGL. -->
+    <nav aria-label="Projects">
+      <ul id="project-list" class="sr-only">
+        {
+          projects.map((p) => (
+            <li>
+              <a href={`/${p.slug}/`} data-index={p.index}>
+                {p.titleMixedCase} — {p.type}, {p.year}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Preview mode UI (filled in by scripts/pages/home.ts). No stacking context here on
+         purpose: the two title layers sit below / above the canvas. -->
+    <div class="preview">
+      <div class="ptitle ptitle--back" aria-hidden="true"></div>
+      <div class="ptitle ptitle--front" aria-hidden="true"></div>
+      <div class="pexplore">
+        <a id="explore" class="ulink is-underlined" href="/"><span class="ulink__in">Explore</span></a>
+        <span class="pexplore__line" aria-hidden="true"><span data-mask-in></span></span>
+        <!-- "+" turns into a down arrow on hover; it is a second Explore link. -->
+        <a class="pexplore__plus" href="/" tabindex="-1" aria-label="Explore project">
+          <span class="pplus">
+            <svg class="pplus__svg" data-mask-in width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true">
+              <path class="pplus__stem" d="M6 1v12.4"></path>
+              <path class="pplus__wing pplus__wing--l" d="M6 7H1"></path>
+              <path class="pplus__wing pplus__wing--r" d="M6 7h5"></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+      <!-- Project details shown along the bottom in preview mode (filled by home.ts). -->
+      <div class="pmeta" aria-hidden="true">
+        <div class="pmeta__list"></div>
+        <p class="pmeta__desc"></p>
+      </div>
+    </div>
+  </main>
+</Base>

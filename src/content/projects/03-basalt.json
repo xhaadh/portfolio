@@ -1,0 +1,26 @@
+{
+  "slug": "basalt",
+  "index": 3,
+  "title": "BASALT",
+  "titleMixedCase": "Basalt",
+  "year": 2026,
+  "completed": "Jun. 2026",
+  "type": "Architecture portfolio",
+  "role": "Design & development",
+  "client": "Basalt Studio",
+  "description": "Portfolio for an architecture practice working with stone and timber. Projects are browsed as a continuous material sample wall.",
+  "color": "#1F7A52",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/basalt/cover.webp",
+  "images": [
+    "/images/projects/basalt/cover.webp",
+    "/images/projects/basalt/01.webp",
+    "/images/projects/basalt/02.webp",
+    "/images/projects/basalt/03.webp",
+    "/images/projects/basalt/04.webp",
+    "/images/projects/basalt/05.webp",
+    "/images/projects/basalt/06.webp",
+    "/images/projects/basalt/07.webp"
+  ],
+  "url": "https://example.com/basalt"
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "solstice",
+  "index": 11,
+  "title": "SOLSTICE",
+  "titleMixedCase": "Solstice",
+  "year": 2024,
+  "completed": "Jun. 2024",
+  "type": "Hotel",
+  "role": "Design & development",
+  "client": "Solstice Hotels",
+  "description": "Booking site for a boutique hotel group. Light in every photograph follows the local time at each property.",
+  "color": "#A3462E",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/solstice/cover.webp",
+  "images": [
+    "/images/projects/solstice/cover.webp",
+    "/images/projects/solstice/01.webp",
+    "/images/projects/solstice/02.webp",
+    "/images/projects/solstice/03.webp",
+    "/images/projects/solstice/04.webp",
+    "/images/projects/solstice/05.webp"
+  ],
+  "url": "https://example.com/solstice"
+}

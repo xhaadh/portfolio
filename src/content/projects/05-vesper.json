@@ -1,0 +1,24 @@
+{
+  "slug": "vesper",
+  "index": 5,
+  "title": "VESPER",
+  "titleMixedCase": "Vesper",
+  "year": 2025,
+  "completed": "Dec. 2025",
+  "type": "Fashion lookbook",
+  "role": "Development",
+  "client": "Maison Vesper",
+  "description": "An autumn/winter lookbook where each garment unfolds from a single thread drawn in a fragment shader.",
+  "color": "#8E3FD1",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/vesper/cover.webp",
+  "images": [
+    "/images/projects/vesper/cover.webp",
+    "/images/projects/vesper/01.webp",
+    "/images/projects/vesper/02.webp",
+    "/images/projects/vesper/03.webp",
+    "/images/projects/vesper/04.webp",
+    "/images/projects/vesper/05.webp"
+  ],
+  "url": "https://example.com/vesper"
+}

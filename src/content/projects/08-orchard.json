@@ -1,0 +1,24 @@
+{
+  "slug": "orchard",
+  "index": 8,
+  "title": "ORCHARD",
+  "titleMixedCase": "Orchard",
+  "year": 2025,
+  "completed": "May 2025",
+  "type": "Restaurant",
+  "role": "Design & development",
+  "client": "Orchard & Co.",
+  "description": "Seasonal restaurant website whose palette and imagery rotate with what is currently being harvested.",
+  "color": "#B83268",
+  "textColor": "#F6EBD0",
+  "cover": "/images/projects/orchard/cover.webp",
+  "images": [
+    "/images/projects/orchard/cover.webp",
+    "/images/projects/orchard/01.webp",
+    "/images/projects/orchard/02.webp",
+    "/images/projects/orchard/03.webp",
+    "/images/projects/orchard/04.webp",
+    "/images/projects/orchard/05.webp"
+  ],
+  "url": "https://example.com/orchard"
+}
